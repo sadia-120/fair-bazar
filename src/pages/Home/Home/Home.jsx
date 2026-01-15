@@ -1,5 +1,11 @@
+import Banner from "../Banner/Banner";
+import Products from "../Products/Products";
+
 const Home = () => {
-    return <div>hello sadia!</div>
+    return <div>
+        <Banner />
+        <Products />
+    </div>
 }
 
 export default Home;
