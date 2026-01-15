@@ -1,12 +1,19 @@
 import { Outlet } from "react-router";
 import Navebr from "../../components/navber/Navber";
+import Footer from "../../components/Footer/Footer";
 
 const RootLayput = () => {
-return <div>
-    <Navebr />
-    <Outlet />
-    <h3>footer</h3>
-</div>
-}
+  return (
+    <div>
+      <nav>
+        <Navebr />
+      </nav>
+      <main className="min-h-[calc(100vh-285px)]">
+        <Outlet />
+      </main>
+      <Footer />
+    </div>
+  );
+};
 
 export default RootLayput;

@@ -1,14 +1,15 @@
-import { NavLink } from 'react-router';
+import { Link, NavLink } from 'react-router';
 import logo from '../../assets/logo2.png'
 
 const Navebr = () => {
 
     const links = <>
         <li><NavLink to={'/'}>Home</NavLink></li>
-        <li><NavLink to={'/allProduct'}>All Product</NavLink></li>
+        <li><NavLink to={'/allProduct'}>Products</NavLink></li>
         <li><NavLink to={'/contact'}>Women</NavLink></li>
         <li><NavLink to={'/contact'}>Men</NavLink></li>
-        <li><NavLink to={'/contact'}>Kids</NavLink></li>
+        <li><NavLink to={'/kids'}>Kids</NavLink></li>
+        <li><NavLink to={'/about'}>About Us</NavLink></li>
         <li><NavLink to={'/contact'}>Contact</NavLink></li>
     </>
 
@@ -24,10 +25,10 @@ const Navebr = () => {
        {links}
       </ul>
     </div>
-    <div className='flex items-center gap-2'>
+    <Link to={'/'} className='flex items-center gap-2'>
         <img className='w-12 h-12 rounded-full' src={logo} alt="logo" />
-        <h2 className='my-text font-semibold text-2xl'>FairBazar</h2>
-    </div>
+        <h2 className='text-orange-300 font-semibold text-2xl'>FairBazar</h2>
+    </Link>
   </div>
   <div className="navbar-center hidden lg:flex">
     <ul className="menu menu-horizontal px-1 text-white">
