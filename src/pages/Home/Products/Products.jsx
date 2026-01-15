@@ -1,96 +1,7 @@
 import { Link } from "react-router";
 import PCard from "../../../components/PCard/PCard";
-import { FaCartShopping } from "react-icons/fa6";
 
 const datas = [
-  {
-    id: 1,
-    title: "Men Slim Fit Casual Shirt",
-    category: "Men",
-    price: 29.99,
-    discount: 10,
-    rating: 4.5,
-    stock: 120,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-    description: "Premium cotton slim fit casual shirt for everyday comfort.",
-  },
-  {
-    id: 2,
-    title: "Men Formal Office Shirt",
-    category: "Men",
-    price: 34.99,
-    discount: 15,
-    rating: 4.6,
-    stock: 90,
-    image: "https://images.unsplash.com/photo-1593032465171-8b32d09f7d4d",
-    description: "Elegant formal shirt perfect for office and meetings.",
-  },
-  {
-    id: 3,
-    title: "Men Denim Jacket",
-    category: "Men",
-    price: 59.99,
-    discount: 20,
-    rating: 4.7,
-    stock: 60,
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-    description: "Stylish denim jacket with modern fit and durable fabric.",
-  },
-  {
-    id: 4,
-    title: "Men Cotton T-Shirt",
-    category: "Men",
-    price: 19.99,
-    discount: 5,
-    rating: 4.3,
-    stock: 200,
-    image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
-    description: "Soft breathable cotton t-shirt for casual wear.",
-  },
-  {
-    id: 5,
-    title: "Men Hoodie Sweatshirt",
-    category: "Men",
-    price: 44.99,
-    discount: 18,
-    rating: 4.6,
-    stock: 75,
-    image: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e",
-    description: "Warm and comfortable hoodie with premium stitching.",
-  },
-  {
-    id: 6,
-    title: "Women Floral Summer Dress",
-    category: "Women",
-    price: 39.99,
-    discount: 12,
-    rating: 4.7,
-    stock: 110,
-    image: "https://images.unsplash.com/photo-1520975682031-ae7b92d1f3ad",
-    description: "Lightweight floral dress perfect for summer outings.",
-  },
-  {
-    id: 7,
-    title: "Women Party Wear Gown",
-    category: "Women",
-    price: 79.99,
-    discount: 25,
-    rating: 4.8,
-    stock: 40,
-    image: "https://images.unsplash.com/photo-1593032457860-3c4b8a4a8988",
-    description: "Elegant party gown with premium fabric and design.",
-  },
-  {
-    id: 8,
-    title: "Women Casual Kurti",
-    category: "Women",
-    price: 27.99,
-    discount: 10,
-    rating: 4.4,
-    stock: 130,
-    image: "https://images.unsplash.com/photo-1618354691438-25bc04584c23",
-    description: "Comfortable kurti suitable for daily wear.",
-  },
   {
     id: 9,
     title: "Women Denim Jacket",
@@ -225,26 +136,153 @@ const datas = [
   },
 ];
 
+const datas2 = [
+  {
+    id: 1,
+    title: "Men Slim Fit Casual Shirt",
+    category: "Men",
+    price: 29.99,
+    discount: 10,
+    rating: 4.5,
+    stock: 120,
+    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+    description: "Premium cotton slim fit casual shirt for everyday comfort.",
+  },
+  {
+    id: 2,
+    title: "Men Formal Office Shirt",
+    category: "Men",
+    price: 34.99,
+    discount: 15,
+    rating: 4.6,
+    stock: 90,
+    image: "https://images.unsplash.com/photo-1593032465171-8b32d09f7d4d",
+    description: "Elegant formal shirt perfect for office and meetings.",
+  },
+  {
+    id: 3,
+    title: "Men Denim Jacket",
+    category: "Men",
+    price: 59.99,
+    discount: 20,
+    rating: 4.7,
+    stock: 60,
+    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
+    description: "Stylish denim jacket with modern fit and durable fabric.",
+  },
+  {
+    id: 4,
+    title: "Men Cotton T-Shirt",
+    category: "Men",
+    price: 19.99,
+    discount: 5,
+    rating: 4.3,
+    stock: 200,
+    image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
+    description: "Soft breathable cotton t-shirt for casual wear.",
+  },
+  {
+    id: 5,
+    title: "Men Hoodie Sweatshirt",
+    category: "Men",
+    price: 44.99,
+    discount: 18,
+    rating: 4.6,
+    stock: 75,
+    image: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e",
+    description: "Warm and comfortable hoodie with premium stitching.",
+  },
+  {
+    id: 6,
+    title: "Women Floral Summer Dress",
+    category: "Women",
+    price: 39.99,
+    discount: 12,
+    rating: 4.7,
+    stock: 110,
+    image: "https://images.unsplash.com/photo-1520975682031-ae7b92d1f3ad",
+    description: "Lightweight floral dress perfect for summer outings.",
+  },
+  {
+    id: 7,
+    title: "Women Party Wear Gown",
+    category: "Women",
+    price: 79.99,
+    discount: 25,
+    rating: 4.8,
+    stock: 40,
+    image: "https://images.unsplash.com/photo-1593032457860-3c4b8a4a8988",
+    description: "Elegant party gown with premium fabric and design.",
+  },
+  {
+    id: 8,
+    title: "Women Casual Kurti",
+    category: "Women",
+    price: 27.99,
+    discount: 10,
+    rating: 4.4,
+    stock: 130,
+    image: "https://images.unsplash.com/photo-1618354691438-25bc04584c23",
+    description: "Comfortable kurti suitable for daily wear.",
+  },
+];
+
 const Products = () => {
+  const singleProduct = {
+    id: 21,
+    title: "Men Slim Fit Casual Shirt",
+    category: "Men",
+    price: 29.99,
+    discount: 10,
+    rating: 4.5,
+    stock: 120,
+    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+    description: "Premium cotton slim fit casual shirt for everyday comfort.",
+  };
+
   return (
     <div className="container mx-auto">
-    <h3 className="text-4xl font-bold text-primary text-center my-10">Our Products</h3>
-    <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
-      {datas.map((product) => (
-        <PCard
-          key={product.id}
-          title={product.title}
-          category={product.category}
-          price={product.price}
-          discount={product.discount}
-          image={product.image}
-        ></PCard>
-      ))}
-    </div>
+      <h3 className="text-4xl font-bold text-primary text-center my-10">
+        Our Products
+      </h3>
 
-   <div className="flex justify-center">
-     <Link className="btn btn-outline btn-primary my-10" to={'allProduct'}>All Product</Link>
-   </div>
+    
+
+      <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
+        {datas.map((product) => (
+          <PCard
+            key={product.id}
+            title={product.title}
+            category={product.category}
+            price={product.price}
+            discount={product.discount}
+            image={product.image}
+          ></PCard>
+        ))}
+      </div>
+
+      <div className="">
+        <img className="h-125 my-10 rounded-2xl w-full" src={singleProduct.image} alt="" />
+      </div>
+
+      <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
+        {datas2.map((product) => (
+          <PCard
+            key={product.id}
+            title={product.title}
+            category={product.category}
+            price={product.price}
+            discount={product.discount}
+            image={product.image}
+          ></PCard>
+        ))}
+      </div>
+
+      <div className="flex justify-center">
+        <Link className="btn btn-outline btn-primary my-10" to={"allProduct"}>
+          All Product
+        </Link>
+      </div>
     </div>
   );
 };

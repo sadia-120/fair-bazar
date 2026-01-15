@@ -4,7 +4,8 @@ import Home from "../pages/Home/Home/Home";
 import Contact from "../pages/Contact/Contact";
 import AboutUs from "../pages/About/About";
 import AllProduct from "../pages/AllProduct/AllProduct";
-import Kids from "../pages/Kids/Kids";
+import Women from "../pages/Women/Women";
+import Men from "../pages/Men/Men";
 
 const router = createBrowserRouter([
   {
@@ -14,8 +15,9 @@ const router = createBrowserRouter([
       {index: true, Component: Home },
       {path: '/contact', Component: Contact},
       {path: '/about', Component: AboutUs},
-      {path: '/allProduct', Component: AllProduct},
-      {path: '/kids', Component: Kids},
+      {path: '/kids', Component: AllProduct},
+      {path: '/women', Component: Women},
+      {path: '/men', Component: Men},
     ]
   },
 ]);

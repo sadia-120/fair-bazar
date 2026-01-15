@@ -27,9 +27,6 @@ const Footer = () => {
           <Link to={"/contact"} className="link link-hover">
             Contact
           </Link>
-          <Link to={"/allProduct"} className="link link-hover">
-            Products
-          </Link>
           <Link to={"/kids"} className="link link-hover">
             Kids
           </Link>
