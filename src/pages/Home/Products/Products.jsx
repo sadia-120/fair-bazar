@@ -1,140 +1,142 @@
 import { Link } from "react-router";
 import PCard from "../../../components/PCard/PCard";
+import useAxiosSquer from "../../../hooks/useAxiosSquer";
+import { useQuery } from "@tanstack/react-query";
 
-const datas = [
-  {
-    id: 9,
-    title: "Women Denim Jacket",
-    category: "Women",
-    price: 54.99,
-    discount: 18,
-    rating: 4.6,
-    stock: 70,
-    image: "https://images.unsplash.com/photo-1551028719-00167b16eac5",
-    description: "Trendy denim jacket with modern cut.",
-  },
-  {
-    id: 10,
-    title: "Women Long Sleeve Top",
-    category: "Women",
-    price: 24.99,
-    discount: 8,
-    rating: 4.2,
-    stock: 160,
-    image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03",
-    description: "Soft fabric long sleeve top for everyday fashion.",
-  },
-  {
-    id: 11,
-    title: "Kids Printed T-Shirt",
-    category: "Kids",
-    price: 14.99,
-    discount: 5,
-    rating: 4.4,
-    stock: 180,
-    image: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c",
-    description: "Colorful printed t-shirt made for kids comfort.",
-  },
-  {
-    id: 12,
-    title: "Kids Cotton Shorts",
-    category: "Kids",
-    price: 12.99,
-    discount: 7,
-    rating: 4.3,
-    stock: 150,
-    image: "https://images.unsplash.com/photo-1598514982846-1b7f2a6f6b7a",
-    description: "Soft cotton shorts perfect for playtime.",
-  },
-  {
-    id: 13,
-    title: "Kids Hoodie Jacket",
-    category: "Kids",
-    price: 29.99,
-    discount: 15,
-    rating: 4.5,
-    stock: 90,
-    image: "https://images.unsplash.com/photo-1542060748-10c28b62716c",
-    description: "Warm hoodie jacket for kids during winter.",
-  },
-  {
-    id: 14,
-    title: "Unisex Sports Tracksuit",
-    category: "Unisex",
-    price: 64.99,
-    discount: 20,
-    rating: 4.7,
-    stock: 55,
-    image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1",
-    description: "Comfortable tracksuit suitable for workouts and travel.",
-  },
-  {
-    id: 15,
-    title: "Men Traditional Kurta",
-    category: "Men",
-    price: 49.99,
-    discount: 15,
-    rating: 4.6,
-    stock: 85,
-    image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633",
-    description: "Classic traditional kurta with premium fabric.",
-  },
-  {
-    id: 16,
-    title: "Women Silk Saree",
-    category: "Women",
-    price: 99.99,
-    discount: 30,
-    rating: 4.9,
-    stock: 35,
-    image: "https://images.unsplash.com/photo-1610030469668-8e8c1c5e0d3c",
-    description: "Luxury silk saree with elegant design.",
-  },
-  {
-    id: 17,
-    title: "Men Winter Coat",
-    category: "Men",
-    price: 89.99,
-    discount: 22,
-    rating: 4.7,
-    stock: 50,
-    image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
-    description: "Warm winter coat with stylish fit.",
-  },
-  {
-    id: 18,
-    title: "Women Cardigan Sweater",
-    category: "Women",
-    price: 42.99,
-    discount: 12,
-    rating: 4.5,
-    stock: 95,
-    image: "https://images.unsplash.com/photo-1542060748-10c28b62716c",
-    description: "Soft cardigan sweater for cozy days.",
-  },
-  {
-    id: 19,
-    title: "Men Polo T-Shirt",
-    category: "Men",
-    price: 22.99,
-    discount: 10,
-    rating: 4.4,
-    stock: 170,
-    image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
-    description: "Classic polo t-shirt with breathable fabric.",
-  },
-  {
-    id: 20,
-    title: "Women Office Blazer",
-    category: "Women",
-    price: 69.99,
-    discount: 18,
-    rating: 4.6,
-    stock: 65,
-    image: "https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0",
-    description: "Professional blazer designed for office wear.",
-  },
-];
+// const datas = [
+//   {
+//     id: 9,
+//     title: "Women Denim Jacket",
+//     category: "Women",
+//     price: 54.99,
+//     discount: 18,
+//     rating: 4.6,
+//     stock: 70,
+//     image: "https://images.unsplash.com/photo-1551028719-00167b16eac5",
+//     description: "Trendy denim jacket with modern cut.",
+//   },
+//   {
+//     id: 10,
+//     title: "Women Long Sleeve Top",
+//     category: "Women",
+//     price: 24.99,
+//     discount: 8,
+//     rating: 4.2,
+//     stock: 160,
+//     image: "https://images.unsplash.com/photo-1585487000160-6ebcfceb0d03",
+//     description: "Soft fabric long sleeve top for everyday fashion.",
+//   },
+//   {
+//     id: 11,
+//     title: "Kids Printed T-Shirt",
+//     category: "Kids",
+//     price: 14.99,
+//     discount: 5,
+//     rating: 4.4,
+//     stock: 180,
+//     image: "https://images.unsplash.com/photo-1600880292089-90a7e086ee0c",
+//     description: "Colorful printed t-shirt made for kids comfort.",
+//   },
+//   {
+//     id: 12,
+//     title: "Kids Cotton Shorts",
+//     category: "Kids",
+//     price: 12.99,
+//     discount: 7,
+//     rating: 4.3,
+//     stock: 150,
+//     image: "https://images.unsplash.com/photo-1598514982846-1b7f2a6f6b7a",
+//     description: "Soft cotton shorts perfect for playtime.",
+//   },
+//   {
+//     id: 13,
+//     title: "Kids Hoodie Jacket",
+//     category: "Kids",
+//     price: 29.99,
+//     discount: 15,
+//     rating: 4.5,
+//     stock: 90,
+//     image: "https://images.unsplash.com/photo-1542060748-10c28b62716c",
+//     description: "Warm hoodie jacket for kids during winter.",
+//   },
+//   {
+//     id: 14,
+//     title: "Unisex Sports Tracksuit",
+//     category: "Unisex",
+//     price: 64.99,
+//     discount: 20,
+//     rating: 4.7,
+//     stock: 55,
+//     image: "https://images.unsplash.com/photo-1605296867304-46d5465a13f1",
+//     description: "Comfortable tracksuit suitable for workouts and travel.",
+//   },
+//   {
+//     id: 15,
+//     title: "Men Traditional Kurta",
+//     category: "Men",
+//     price: 49.99,
+//     discount: 15,
+//     rating: 4.6,
+//     stock: 85,
+//     image: "https://images.unsplash.com/photo-1620799140408-edc6dcb6d633",
+//     description: "Classic traditional kurta with premium fabric.",
+//   },
+//   {
+//     id: 16,
+//     title: "Women Silk Saree",
+//     category: "Women",
+//     price: 99.99,
+//     discount: 30,
+//     rating: 4.9,
+//     stock: 35,
+//     image: "https://images.unsplash.com/photo-1610030469668-8e8c1c5e0d3c",
+//     description: "Luxury silk saree with elegant design.",
+//   },
+//   {
+//     id: 17,
+//     title: "Men Winter Coat",
+//     category: "Men",
+//     price: 89.99,
+//     discount: 22,
+//     rating: 4.7,
+//     stock: 50,
+//     image: "https://images.unsplash.com/photo-1541099649105-f69ad21f3246",
+//     description: "Warm winter coat with stylish fit.",
+//   },
+//   {
+//     id: 18,
+//     title: "Women Cardigan Sweater",
+//     category: "Women",
+//     price: 42.99,
+//     discount: 12,
+//     rating: 4.5,
+//     stock: 95,
+//     image: "https://images.unsplash.com/photo-1542060748-10c28b62716c",
+//     description: "Soft cardigan sweater for cozy days.",
+//   },
+//   {
+//     id: 19,
+//     title: "Men Polo T-Shirt",
+//     category: "Men",
+//     price: 22.99,
+//     discount: 10,
+//     rating: 4.4,
+//     stock: 170,
+//     image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
+//     description: "Classic polo t-shirt with breathable fabric.",
+//   },
+//   {
+//     id: 20,
+//     title: "Women Office Blazer",
+//     category: "Women",
+//     price: 69.99,
+//     discount: 18,
+//     rating: 4.6,
+//     stock: 65,
+//     image: "https://images.unsplash.com/photo-1592878904946-b3cd8ae243d0",
+//     description: "Professional blazer designed for office wear.",
+//   },
+// ];
 
 const datas2 = [
   {
@@ -228,6 +230,17 @@ const datas2 = [
 ];
 
 const Products = () => {
+
+    const axiosSquer = useAxiosSquer();
+
+  const { data: kids = [] } = useQuery({
+    queryKey: ["kids"],
+    queryFn: async () => {
+      const res = await axiosSquer.get("/kids");
+      return res.data;
+    },
+  });
+
   const singleProduct = {
     id: 21,
     title: "Men Slim Fit Casual Shirt",
@@ -247,15 +260,15 @@ const Products = () => {
       </h3>
 
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
-        {datas.map((product) => (
+        {kids.map((product) => (
           <PCard
-            key={product.id}
+            key={product._id}
             title={product.title}
             category={product.category}
             price={product.price}
             discount={product.discount}
             image={product.image}
-            id={product.id}
+            id={product._id}
           ></PCard>
         ))}
       </div>

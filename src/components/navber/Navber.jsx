@@ -2,10 +2,25 @@ import { Link, NavLink } from "react-router";
 import logo from "../../assets/logo2.png";
 import { FaCartShopping, FaXmark } from "react-icons/fa6";
 import { IoMenuSharp } from "react-icons/io5";
-import { useState } from "react";
+import { use, useState } from "react";
+import { AuthContext } from "../../context/AuthContext";
+// import useAxiosSquer from "../../hooks/useAxiosSquer";
+// import { useQuery } from "@tanstack/react-query";
 
 const Navebr = () => {
   const [open, setOpen] = useState(false);
+  const { user, signOutUser } = use(AuthContext);
+  // const axiosSquer = useAxiosSquer();
+
+  // const { data: kids = [] } = useQuery({
+  //   queryKey: ["kids"],
+  //   queryFn: async () => {
+  //     const res = await axiosSquer.get("/kids");
+  //     return res.data;
+  //   },
+  // });
+  // console.log(kids);
+  console.log(user);
 
   const links = (
     <>
@@ -74,11 +89,22 @@ const Navebr = () => {
 
       {/* menu list */}
       <div
-        className={`absolute bg-black/60 text-primary -top-80 right-8 p-8 z-50 ${
+        className={`absolute bg-black/60 text-primary -top-100 right-8 p-8 z-50 ${
           open && " fixed top-16"
         }`}
       >
         <ul className="flex flex-col space-y-3">{links}</ul>
+        <div className="divider" />
+        {user && (
+          <button
+            onClick={() => {
+              signOutUser();
+            }}
+            className="btn btn-warning"
+          >
+            LogOut
+          </button>
+        )}
       </div>
     </>
   );

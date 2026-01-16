@@ -1,6 +1,8 @@
 import { FaProcedures, FaSearch } from "react-icons/fa";
 import PCard from "../../components/PCard/PCard";
 import DiscountBanner from "../Home/DiscountBanner/DiscountBanner";
+import useAxiosSquer from "../../hooks/useAxiosSquer";
+import { useQuery } from "@tanstack/react-query";
 
 const datas = [
   {
@@ -92,7 +94,7 @@ const datas = [
     description: "Luxury silk saree with elegant design.",
   },
   {
-    id: 1,
+    id: 17,
     title: "Men Slim Fit Casual Shirt",
     category: "Men",
     price: 29.99,
@@ -180,7 +182,7 @@ const datas = [
     description: "Comfortable kurti suitable for daily wear.",
   },
   {
-    id: 9,
+    id: 18,
     title: "Women Denim Jacket",
     category: "Women",
     price: 54.99,
@@ -191,7 +193,7 @@ const datas = [
     description: "Trendy denim jacket with modern cut.",
   },
   {
-    id: 10,
+    id: 19,
     title: "Women Long Sleeve Top",
     category: "Women",
     price: 24.99,
@@ -202,7 +204,7 @@ const datas = [
     description: "Soft fabric long sleeve top for everyday fashion.",
   },
   {
-    id: 11,
+    id: 20,
     title: "Kids Printed T-Shirt",
     category: "Kids",
     price: 14.99,
@@ -213,7 +215,7 @@ const datas = [
     description: "Colorful printed t-shirt made for kids comfort.",
   },
   {
-    id: 12,
+    id: 21,
     title: "Kids Cotton Shorts",
     category: "Kids",
     price: 12.99,
@@ -224,7 +226,7 @@ const datas = [
     description: "Soft cotton shorts perfect for playtime.",
   },
   {
-    id: 13,
+    id: 22,
     title: "Kids Hoodie Jacket",
     category: "Kids",
     price: 29.99,
@@ -235,7 +237,7 @@ const datas = [
     description: "Warm hoodie jacket for kids during winter.",
   },
   {
-    id: 14,
+    id: 23,
     title: "Unisex Sports Tracksuit",
     category: "Unisex",
     price: 64.99,
@@ -246,7 +248,7 @@ const datas = [
     description: "Comfortable tracksuit suitable for workouts and travel.",
   },
   {
-    id: 15,
+    id: 24,
     title: "Men Traditional Kurta",
     category: "Men",
     price: 49.99,
@@ -257,7 +259,7 @@ const datas = [
     description: "Classic traditional kurta with premium fabric.",
   },
   {
-    id: 16,
+    id: 25,
     title: "Women Silk Saree",
     category: "Women",
     price: 99.99,
@@ -268,7 +270,7 @@ const datas = [
     description: "Luxury silk saree with elegant design.",
   },
   {
-    id: 17,
+    id: 26,
     title: "Men Winter Coat",
     category: "Men",
     price: 89.99,
@@ -279,7 +281,7 @@ const datas = [
     description: "Warm winter coat with stylish fit.",
   },
   {
-    id: 18,
+    id: 27,
     title: "Women Cardigan Sweater",
     category: "Women",
     price: 42.99,
@@ -290,7 +292,7 @@ const datas = [
     description: "Soft cardigan sweater for cozy days.",
   },
   {
-    id: 19,
+    id: 28,
     title: "Men Polo T-Shirt",
     category: "Men",
     price: 22.99,
@@ -301,7 +303,7 @@ const datas = [
     description: "Classic polo t-shirt with breathable fabric.",
   },
   {
-    id: 20,
+    id: 29,
     title: "Women Office Blazer",
     category: "Women",
     price: 69.99,
@@ -313,99 +315,109 @@ const datas = [
   },
 ];
 
-const datas2 = [
-    {
-    id: 1,
-    title: "Men Slim Fit Casual Shirt",
-    category: "Men",
-    price: 29.99,
-    discount: 10,
-    rating: 4.5,
-    stock: 120,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-    description: "Premium cotton slim fit casual shirt for everyday comfort.",
-  },
-  {
-    id: 1,
-    title: "Men Slim Fit Casual Shirt",
-    category: "Men",
-    price: 29.99,
-    discount: 10,
-    rating: 4.5,
-    stock: 120,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-    description: "Premium cotton slim fit casual shirt for everyday comfort.",
-  },
-  {
-    id: 2,
-    title: "Men Formal Office Shirt",
-    category: "Men",
-    price: 34.99,
-    discount: 15,
-    rating: 4.6,
-    stock: 90,
-    image: "https://images.unsplash.com/photo-1593032465171-8b32d09f7d4d",
-    description: "Elegant formal shirt perfect for office and meetings.",
-  },
-  {
-    id: 3,
-    title: "Men Denim Jacket",
-    category: "Men",
-    price: 59.99,
-    discount: 20,
-    rating: 4.7,
-    stock: 60,
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-    description: "Stylish denim jacket with modern fit and durable fabric.",
-  },
-  {
-    id: 4,
-    title: "Men Cotton T-Shirt",
-    category: "Men",
-    price: 19.99,
-    discount: 5,
-    rating: 4.3,
-    stock: 200,
-    image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
-    description: "Soft breathable cotton t-shirt for casual wear.",
-  },
-  {
-    id: 5,
-    title: "Men Hoodie Sweatshirt",
-    category: "Men",
-    price: 44.99,
-    discount: 18,
-    rating: 4.6,
-    stock: 75,
-    image: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e",
-    description: "Warm and comfortable hoodie with premium stitching.",
-  },
-  {
-    id: 6,
-    title: "Women Floral Summer Dress",
-    category: "Women",
-    price: 39.99,
-    discount: 12,
-    rating: 4.7,
-    stock: 110,
-    image: "https://images.unsplash.com/photo-1520975682031-ae7b92d1f3ad",
-    description: "Lightweight floral dress perfect for summer outings.",
-  },
-  {
-    id: 7,
-    title: "Women Party Wear Gown",
-    category: "Women",
-    price: 79.99,
-    discount: 25,
-    rating: 4.8,
-    stock: 40,
-    image: "https://images.unsplash.com/photo-1593032457860-3c4b8a4a8988",
-    description: "Elegant party gown with premium fabric and design.",
-  },
-
-];
+// const datas2 = [
+//   {
+//     id: 1,
+//     title: "Men Slim Fit Casual Shirt",
+//     category: "Men",
+//     price: 29.99,
+//     discount: 10,
+//     rating: 4.5,
+//     stock: 120,
+//     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+//     description: "Premium cotton slim fit casual shirt for everyday comfort.",
+//   },
+//   {
+//     id: 1,
+//     title: "Men Slim Fit Casual Shirt",
+//     category: "Men",
+//     price: 29.99,
+//     discount: 10,
+//     rating: 4.5,
+//     stock: 120,
+//     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+//     description: "Premium cotton slim fit casual shirt for everyday comfort.",
+//   },
+//   {
+//     id: 2,
+//     title: "Men Formal Office Shirt",
+//     category: "Men",
+//     price: 34.99,
+//     discount: 15,
+//     rating: 4.6,
+//     stock: 90,
+//     image: "https://images.unsplash.com/photo-1593032465171-8b32d09f7d4d",
+//     description: "Elegant formal shirt perfect for office and meetings.",
+//   },
+//   {
+//     id: 3,
+//     title: "Men Denim Jacket",
+//     category: "Men",
+//     price: 59.99,
+//     discount: 20,
+//     rating: 4.7,
+//     stock: 60,
+//     image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
+//     description: "Stylish denim jacket with modern fit and durable fabric.",
+//   },
+//   {
+//     id: 4,
+//     title: "Men Cotton T-Shirt",
+//     category: "Men",
+//     price: 19.99,
+//     discount: 5,
+//     rating: 4.3,
+//     stock: 200,
+//     image: "https://images.unsplash.com/photo-1523381294911-8d3cead13475",
+//     description: "Soft breathable cotton t-shirt for casual wear.",
+//   },
+//   {
+//     id: 5,
+//     title: "Men Hoodie Sweatshirt",
+//     category: "Men",
+//     price: 44.99,
+//     discount: 18,
+//     rating: 4.6,
+//     stock: 75,
+//     image: "https://images.unsplash.com/photo-1607345366928-199ea26cfe3e",
+//     description: "Warm and comfortable hoodie with premium stitching.",
+//   },
+//   {
+//     id: 6,
+//     title: "Women Floral Summer Dress",
+//     category: "Women",
+//     price: 39.99,
+//     discount: 12,
+//     rating: 4.7,
+//     stock: 110,
+//     image: "https://images.unsplash.com/photo-1520975682031-ae7b92d1f3ad",
+//     description: "Lightweight floral dress perfect for summer outings.",
+//   },
+//   {
+//     id: 7,
+//     title: "Women Party Wear Gown",
+//     category: "Women",
+//     price: 79.99,
+//     discount: 25,
+//     rating: 4.8,
+//     stock: 40,
+//     image: "https://images.unsplash.com/photo-1593032457860-3c4b8a4a8988",
+//     description: "Elegant party gown with premium fabric and design.",
+//   },
+// ];
 
 const AllProduct = () => {
+  const axiosSquer = useAxiosSquer();
+
+  const { data: kids = [] } = useQuery({
+    queryKey: ["kids"],
+    queryFn: async () => {
+      const res = await axiosSquer.get("/kids");
+      return res.data;
+    },
+  });
+
+  // console.log(kids);
 
   const singleProduct = {
     id: 21,
@@ -433,7 +445,10 @@ const AllProduct = () => {
 
       <div className="flex justify-between items-center my-10">
         <h3 className=" text-2xl font-bold">
-          Products <span className=" text-primary">({datas.length + datas2.length})</span>{" "}
+          Products{" "}
+          <span className=" text-primary">
+            ({datas.length + kids.length})
+          </span>{" "}
           founds
         </h3>
         <form onSubmit={handleSearch} className=" relative">
@@ -447,16 +462,16 @@ const AllProduct = () => {
         </form>
       </div>
 
-       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
-        {datas2.map((product) => (
+      <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
+        {kids.map((product) => (
           <PCard
-            key={product.id}
+            key={product._id}
             title={product.title}
             category={product.category}
             price={product.price}
             discount={product.discount}
             image={product.image}
-            id={product.id}
+            id={product._id}
           ></PCard>
         ))}
       </div>
@@ -469,7 +484,6 @@ const AllProduct = () => {
         />
       </div> */}
 
-      
       <DiscountBanner />
 
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">

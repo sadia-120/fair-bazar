@@ -6,9 +6,11 @@ import AboutUs from "../pages/About/About";
 import AllProduct from "../pages/AllProduct/AllProduct";
 import Women from "../pages/Women/Women";
 import Men from "../pages/Men/Men";
-import Error404 from "../pages/Error404/Error404";
+import Error404 from "../pages/Error404/Error404"; 
 import KidsDitails from "../pages/KidsDitails/KidsDitails";
 import AllCart from "../pages/AllCarts/AllCarts";
+import LoginPage from "../pages/Login/Login";
+import RegisterPage from "../pages/Register/Register";
 
 const router = createBrowserRouter([
   {
@@ -24,6 +26,8 @@ const router = createBrowserRouter([
       {path: '/men', Component: Men},
       {path: '/kidsDitails/:id', Component: KidsDitails },
       {path: '/allCarts', Component: AllCart},
+      {path: '/login', Component: LoginPage},
+      {path: '/register', Component: RegisterPage},
     ]
   },
 ]);

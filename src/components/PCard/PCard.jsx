@@ -1,16 +1,50 @@
+import { use } from "react";
 import { FaCartPlus, FaEye } from "react-icons/fa";
-import { Link } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
+import { AuthContext } from "../../context/AuthContext";
+import useAxiosSquer from "../../hooks/useAxiosSquer";
 
 const PCard = ({ title, category, price, discount, image, id }) => {
   // Calculate discounted price
   const discountedPrice = (price - (price * discount) / 100).toFixed(2);
 
+  const { user } = use(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const axiosSquer = useAxiosSquer();
+  // console.log(user);
+
+  // handleAddCart
+  const handleAddCart = async (id) => {
+    if (!user) {
+      alert("Please log in to add items to your cart");
+
+      //   location.state = location.pathname;
+
+      navigate("/login", { state: location.pathname });
+    }else{
+      const cartItem = {
+        userName: user?.displayName,
+        userEmail: user?.email,
+        kidsId: id,
+        kidsName: title,
+        isPaid: false,
+        kidsImage: image,
+        kidsCategory: category,
+        kidsPrice: price,
+      };
+
+      await axiosSquer.post("/addCart", cartItem);
+      console.log("Added to cart:", cartItem);
+      alert("Product added to cart!");
+    }
+    // user ? alert(id) : alert("please login");
+  };
 
   // console.log(`product id:`, id);
 
   return (
     <div className="card bg-base-100 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
-      
       {/* Product Image */}
       <figure className="overflow-hidden">
         <img
@@ -38,10 +72,16 @@ const PCard = ({ title, category, price, discount, image, id }) => {
 
         {/* Buttons */}
         <div className="card-actions mt-4 flex gap-3">
-          <Link to={`/kidsDitails/${id}`} className="btn btn-outline btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200">
+          <Link
+            to={`/kidsDitails/${id}`}
+            className="btn btn-outline btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200"
+          >
             <FaEye /> View Details
           </Link>
-          <button className="btn btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200">
+          <button
+            onClick={() => handleAddCart(id)}
+            className="btn btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200"
+          >
             <FaCartPlus /> Add to Cart
           </button>
         </div>
