@@ -456,6 +456,7 @@ const AllProduct = () => {
             price={product.price}
             discount={product.discount}
             image={product.image}
+            id={product.id}
           ></PCard>
         ))}
       </div>
@@ -480,6 +481,7 @@ const AllProduct = () => {
             price={product.price}
             discount={product.discount}
             image={product.image}
+            id={product.id}
           ></PCard>
         ))}
       </div>

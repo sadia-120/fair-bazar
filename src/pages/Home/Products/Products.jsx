@@ -246,8 +246,6 @@ const Products = () => {
         Our Products
       </h3>
 
-    
-
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
         {datas.map((product) => (
           <PCard
@@ -257,12 +255,51 @@ const Products = () => {
             price={product.price}
             discount={product.discount}
             image={product.image}
+            id={product.id}
           ></PCard>
         ))}
       </div>
 
-      <div className="">
-        <img className="h-125 my-10 rounded-2xl w-full" src={singleProduct.image} alt="" />
+      <div className="relative my-10">
+        {/* Product Image */}
+        <img
+          src={singleProduct.image}
+          alt={singleProduct.title}
+          className="w-full h-125 object-cover rounded-2xl"
+        />
+
+        {/* Dark Overlay for readability */}
+        <div className="absolute inset-0 bg-black/40 rounded-2xl"></div>
+
+        {/* Text Content */}
+        <div className="absolute inset-0 flex flex-col justify-center items-start px-6 md:px-20 space-y-4">
+          <h1 className="text-3xl md:text-5xl font-extrabold text-white">
+            {singleProduct.title}
+          </h1>
+
+          <p className="text-white text-lg md:text-xl max-w-lg">
+            {singleProduct.description}
+          </p>
+
+          <div className="flex items-center gap-4 mt-2">
+            <span className="text-2xl font-bold text-primary">
+              ${singleProduct.price}
+            </span>
+            {singleProduct.discount && (
+              <span className="text-lg text-gray-300 line-through">
+                $
+                {(
+                  singleProduct.price +
+                  singleProduct.price * (singleProduct.discount / 100)
+                ).toFixed(2)}
+              </span>
+            )}
+          </div>
+
+          <button className="bg-primary text-orange-950 cursor-pointer font-semibold px-6 py-3 rounded-lg hover:bg-primary/80 transition mt-2">
+            Add to Cart
+          </button>
+        </div>
       </div>
 
       <div className="grid md:grid-cols-3 lg:grid-cols-4 gap-8 mx-4">
@@ -274,6 +311,7 @@ const Products = () => {
             price={product.price}
             discount={product.discount}
             image={product.image}
+            id={product.id}
           ></PCard>
         ))}
       </div>

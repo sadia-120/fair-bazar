@@ -1,8 +1,12 @@
 import { FaCartPlus, FaEye } from "react-icons/fa";
+import { Link } from "react-router";
 
-const PCard = ({ title, category, price, discount, image }) => {
+const PCard = ({ title, category, price, discount, image, id }) => {
   // Calculate discounted price
   const discountedPrice = (price - (price * discount) / 100).toFixed(2);
+
+
+  // console.log(`product id:`, id);
 
   return (
     <div className="card bg-base-100 shadow-lg rounded-xl overflow-hidden hover:shadow-2xl transition-all duration-300">
@@ -34,9 +38,9 @@ const PCard = ({ title, category, price, discount, image }) => {
 
         {/* Buttons */}
         <div className="card-actions mt-4 flex gap-3">
-          <button className="btn btn-outline btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200">
+          <Link to={`/kidsDitails/${id}`} className="btn btn-outline btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200">
             <FaEye /> View Details
-          </button>
+          </Link>
           <button className="btn btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200">
             <FaCartPlus /> Add to Cart
           </button>

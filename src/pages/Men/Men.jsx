@@ -1,5 +1,6 @@
 import { FaStar, FaShoppingCart, FaEye, FaFilter } from "react-icons/fa";
 import { useState } from "react";
+import { Link } from "react-router";
 
 // Sample Men Products
 const menProducts = [
@@ -101,6 +102,8 @@ const Men = () => {
     alert(`${product.title} added to cart!`);
   };
 
+  console.log(cart);
+
   const handleView = (product) => {
     alert(`Viewing: ${product.title}`);
   };
@@ -147,13 +150,14 @@ const Men = () => {
 
               {/* Overlay Buttons */}
               <div className="absolute inset-0 flex items-center justify-center gap-3 bg-black/40 opacity-0 group-hover:opacity-100 transition">
-                <button
-                  onClick={() => handleView(product)}
+                <Link
+                to={`/kidsDitails/${product.id}`}
+                  // onClick={() => handleView(product)}
                   className="flex items-center gap-1 bg-white text-primary cursor-pointer px-4 py-2 rounded-lg text-sm hover:bg-gray-100 transition"
                 >
                   <FaEye />
                   View
-                </button>
+                </Link>
 
                 <button
                   onClick={() => handleAddToCart(product)}
