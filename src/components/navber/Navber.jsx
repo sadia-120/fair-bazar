@@ -4,13 +4,29 @@ import { FaCartShopping, FaXmark } from "react-icons/fa6";
 import { IoMenuSharp } from "react-icons/io5";
 import { use, useState } from "react";
 import { AuthContext } from "../../context/AuthContext";
+import { useQuery } from "@tanstack/react-query";
+import useAxiosSquer from "../../hooks/useAxiosSquer";
+import useUserRole from "../../hooks/useUserRole";
 // import useAxiosSquer from "../../hooks/useAxiosSquer";
 // import { useQuery } from "@tanstack/react-query";
 
 const Navebr = () => {
   const [open, setOpen] = useState(false);
   const { user, signOutUser } = use(AuthContext);
-  // const axiosSquer = useAxiosSquer();
+  const axiosSquer = useAxiosSquer();
+  const {userInfo} = useUserRole();
+  // console.log(userInfo);
+
+  const {data: myKids = []} = useQuery({
+    queryKey: ["myKids", user?.email],
+    queryFn: async () => {
+      const res = await axiosSquer.get(`/addCart/${user?.email}`);
+      return res.data;
+    }
+  });
+
+  // console.log(myKids.length);
+
 
   // const { data: kids = [] } = useQuery({
   //   queryKey: ["kids"],
@@ -20,7 +36,9 @@ const Navebr = () => {
   //   },
   // });
   // console.log(kids);
-  console.log(user);
+  // console.log(userInfo);
+
+  
 
   const links = (
     <>
@@ -36,7 +54,10 @@ const Navebr = () => {
       <li>
         <NavLink to={"/men"}>Men</NavLink>
       </li>
-      {/* <li>
+      {
+        user && userInfo.role === 'admin' && <><li><Link to={'/dashboard/questios'}>Managing</Link></li></>
+      }
+{/* <li>
         <NavLink to={"/kids"}>Kids</NavLink>
       </li> */}
       <li>
@@ -68,8 +89,8 @@ const Navebr = () => {
               <Link to={"/allCarts"}>
                 <FaCartShopping className="text-primary" size={24} />
               </Link>
-              <h2 className="text-white font-bold absolute -top-2 right-0">
-                0
+              <h2 className="text-orange-200 font-bold absolute -top-2 right-0">
+                {myKids.length}
               </h2>
             </div>
 
@@ -80,7 +101,7 @@ const Navebr = () => {
                 }}
                 className=" cursor-pointer"
               >
-                {open ? <FaXmark size={24} /> : <IoMenuSharp size={24} />}
+                {open ? <FaXmark className="text-error" size={24} /> : <IoMenuSharp className="text-primary" size={24} />}
               </button>
             </div>
           </div>

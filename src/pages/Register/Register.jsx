@@ -6,10 +6,12 @@ import {
   FaUserAlt,
   FaLock,
   FaEnvelope,
+  FaPhoneAlt,
 } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
 import useAxiosSquer from "../../hooks/useAxiosSquer";
+import { useNavigate } from "react-router";
 
 const RegisterPage = () => {
   const { createUser, updateUser } = use(AuthContext);
@@ -18,18 +20,23 @@ const RegisterPage = () => {
     handleSubmit,
     formState: { errors },
     watch,
+    reset,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
   const axiosSquer = useAxiosSquer();
+  const navigate = useNavigate();
 
   const onSubmit = async (data) => {
     createUser(data?.email, data?.confirmPassword)
       .then(() => {
         updateUser(data?.username, "").then(async () => {
           try {
-            const newUser = { name: data?.username, email: data?.email };
+            const newUser = { name: data?.username, email: data?.email, role: 'user', phone: data?.phone };
             await axiosSquer.post("/user", newUser);
+            reset();
+            navigate('/');
+            window.location.reload();
             Swal.fire({
               icon: "success",
               title: "Your work has been saved",
@@ -82,6 +89,22 @@ const RegisterPage = () => {
             {errors.username && (
               <p className="text-red-500 text-sm mt-1">
                 {errors.username.message}
+              </p>
+            )}
+          </div>
+
+          {/* User phone Input */}
+          <div className="relative mb-4">
+            <FaPhoneAlt className="absolute top-4.5 left-3 text-gray-400" />
+            <input
+              type="text"
+              placeholder="Your phone number"
+              {...register("phone", { required: "phone number is required" })}
+              className="w-full pl-10 pr-3 py-3 border border-gray-300 rounded-lg focus:outline-none focus:ring-2 focus:ring-primary"
+            />
+            {errors.username && (
+              <p className="text-red-500 text-sm mt-1">
+                {errors.phone.message}
               </p>
             )}
           </div>

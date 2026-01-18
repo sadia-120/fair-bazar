@@ -8,7 +8,7 @@ const fadeUp = {
 
 const AboutUs = () => {
   return (
-    <section className="min-h-screen bg-linear-to-br from-base-200 to-base-300 py-20">
+    <section className="bg-linear-to-br from-base-200 to-base-300 pt-28 pb-16">
       <div className="max-w-6xl mx-auto px-6">
 
         {/* Header */}

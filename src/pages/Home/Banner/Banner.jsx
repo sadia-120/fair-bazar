@@ -1,5 +1,6 @@
 import { motion } from "framer-motion";
 import { FaArrowRight } from "react-icons/fa";
+import { Link } from "react-router";
 
 const Banner = () => {
   return (
@@ -31,21 +32,22 @@ const Banner = () => {
             </p>
 
             <div className="mt-8 flex gap-4">
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+              to={'/kids'}
+                // whileTap={{ scale: 0.95 }}
                 className="btn btn-primary"
               >
                 Shop Now <FaArrowRight />
-              </motion.button>
+              </Link>
 
-              <motion.button
-                whileHover={{ scale: 1.05 }}
-                whileTap={{ scale: 0.95 }}
+              <Link
+                to={"/about"}
+                // whileHover={{ scale: 1.05 }}
+                // whileTap={{ scale: 0.95 }}
                 className="btn btn-outline btn-primary"
               >
                 Explore More
-              </motion.button>
+              </Link>
             </div>
           </motion.div>
 

@@ -1,4 +1,5 @@
 import { FaTag } from "react-icons/fa";
+import { Link } from "react-router";
 
 const DiscountBanner = () => {
   return (
@@ -25,9 +26,9 @@ const DiscountBanner = () => {
             </div>
 
             {/* CTA */}
-            <button className="bg-primary text-orange-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition">
+            <Link to={'/discount'} className="bg-primary text-orange-900 px-8 py-3 rounded-full font-semibold hover:bg-yellow-300 transition">
               Shop Now
-            </button>
+            </Link>
           </div>
         </div>
       </div>

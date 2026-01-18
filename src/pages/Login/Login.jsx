@@ -9,30 +9,32 @@ import {
 } from "react-icons/fa";
 import { AuthContext } from "../../context/AuthContext";
 import Swal from "sweetalert2";
-import { useLocation, useNavigate } from "react-router";
+import { Link, useLocation, useNavigate } from "react-router";
 
 const LoginPage = () => {
   const {
     register,
     handleSubmit,
     formState: { errors },
+    reset,
   } = useForm();
   const [showPassword, setShowPassword] = useState(false);
   const { signInUser } = use(AuthContext);
   const location = useLocation();
   const navigate = useNavigate();
-//   console.log(location);
+  //   console.log(location);
 
   const onSubmit = (data) => {
     signInUser(data.email, data.password)
       .then(() => {
+        reset();
         Swal.fire({
           icon: "success",
           title: "Log in has been successfully!",
           showConfirmButton: false,
           timer: 1500,
         });
-        navigate(location.state || '/kids')
+        navigate(location.state || "/kids");
       })
       .catch(() => {
         Swal.fire({
@@ -103,6 +105,13 @@ const LoginPage = () => {
             Login
           </button>
         </form>
+
+        <div className="mt-5">
+          create{" "}
+          <Link to={"/register"} className="text-blue-400 hover:underline">
+            Account
+          </Link>
+        </div>
       </div>
     </div>
   );

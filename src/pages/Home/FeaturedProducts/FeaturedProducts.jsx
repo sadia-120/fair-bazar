@@ -1,52 +1,102 @@
+import { use } from "react";
 import { FaStar, FaShoppingCart, FaHeart } from "react-icons/fa";
+import { LuAtom } from "react-icons/lu";
+import { AuthContext } from "../../../context/AuthContext";
+import useAxiosSquer from "../../../hooks/useAxiosSquer";
+import { useLocation, useNavigate } from "react-router";
+import { useQuery } from "@tanstack/react-query";
 
-const featuredProducts = [
-  {
-    id: 1,
-    title: "Men Slim Fit Shirt",
-    price: 29.99,
-    rating: 4.5,
-    image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
-  },
-  {
-    id: 2,
-    title: "Women Summer Dress",
-    price: 39.99,
-    rating: 4.6,
-    image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
-  },
-  {
-    id: 3,
-    title: "Running Shoes",
-    price: 69.99,
-    rating: 4.7,
-    image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77",
-  },
-  {
-    id: 4,
-    title: "Smart Watch",
-    price: 89.99,
-    rating: 4.6,
-    image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
-  },
-];
+// const featuredProducts = [
+//   {
+//     id: 1,
+//     title: "Men Slim Fit Shirt",
+//     price: 29.99,
+//     rating: 4.5,
+//     image: "https://images.unsplash.com/photo-1602810318383-e386cc2a3ccf",
+//   },
+//   {
+//     id: 2,
+//     title: "Women Summer Dress",
+//     price: 39.99,
+//     rating: 4.6,
+//     image: "https://images.unsplash.com/photo-1520975916090-3105956dac38",
+//   },
+//   {
+//     id: 3,
+//     title: "Running Shoes",
+//     price: 69.99,
+//     rating: 4.7,
+//     image: "https://images.unsplash.com/photo-1525966222134-fcfa99b8ae77",
+//   },
+//   {
+//     id: 4,
+//     title: "Smart Watch",
+//     price: 89.99,
+//     rating: 4.6,
+//     image: "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9",
+//   },
+// ];
 
 const FeaturedProducts = () => {
+  const {user} = use(AuthContext);
+  const axiosSquer = useAxiosSquer();
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const {data: featuredProducts = []} = useQuery({
+    queryKey: ['featureKids'],
+    queryFn: async () => {
+      const res = await axiosSquer.get('/feature');
+      return res.data;
+    }
+  });
+
+  // console.log(featuredProducts);
+
+   // handleAddCart
+  const handleAddCart = async (item) => {
+    if (!user) {
+      alert("Please log in to add items to your cart");
+
+      //   location.state = location.pathname;
+
+      navigate("/login", { state: location.pathname });
+    }else{
+      const cartItem = {
+        userName: user?.displayName,
+        userEmail: user?.email,
+        kidsId: item._id,
+        kidsName: item.title,
+        isPaid: false,
+        kidsImage: item.image,
+        kidsCategory: item.category,
+        kidsPrice: item.price,
+      };
+
+      await axiosSquer.post("/addCart", cartItem);
+      console.log("Added to cart:", cartItem);
+      alert("Product added to cart!");
+    }
+    // user ? alert(id) : alert("please login");
+  };
+
   return (
     <section className="py-12 container px-4 mx-auto">
       {/* Section Title */}
       <div className="text-center mb-10">
-        <h2 className="text-4xl font-bold text-primary">Featured Products</h2>
-        <p className="text-gray-500 mt-2">
-          Handpicked items just for you
-        </p>
+        <div className=" flex justify-center">
+          <h2 className="text-4xl font-bold text-primary flex items-center gap-2">
+            <LuAtom /> Featured Products
+          </h2>
+        </div>
+        <p className="text-gray-500 mt-2">Handpicked items just for you</p>
       </div>
 
       {/* Product Grid */}
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6">
         {featuredProducts.map((product) => (
           <div
-            key={product.id}
+            key={product._id}
             className="group bg-white rounded-xl border border-primary hover:shadow-xl transition overflow-hidden"
           >
             {/* Image */}
@@ -77,11 +127,14 @@ const FeaturedProducts = () => {
 
               {/* Price + Cart */}
               <div className="flex items-center justify-between mt-3">
-                <span className="text-lg font-bold">
-                  ${product.price}
-                </span>
+                <span className="text-lg font-bold">${product.price}</span>
 
-                <button className="flex items-center gap-1 bg-primary text-white px-3 py-1.5 rounded-lg text-sm hover:bg-gray-800 transition">
+                <button
+                  onClick={() => {
+                    handleAddCart(product);
+                  }}
+                  className="flex items-center gap-1 bg-primary text-white px-3 py-1.5 rounded-lg text-sm cursor-pointer hover:bg-gray-800 transition"
+                >
                   <FaShoppingCart />
                   Add
                 </button>

@@ -1,4 +1,5 @@
 import { FaStar, FaQuoteLeft } from "react-icons/fa";
+import { FaMessage } from "react-icons/fa6";
 
 const testimonials = [
   {
@@ -36,7 +37,7 @@ const Testimonials = () => {
       <div className="container mx-auto px-4">
         {/* Header */}
         <div className="text-center mb-10">
-          <h2 className="text-3xl font-bold text-primary">What Our Customers Say</h2>
+          <h2 className="text-3xl font-bold text-primary flex justify-center items-center gap-2"><FaMessage /> What Our Customers Say</h2>
           <p className="text-gray-500 mt-2">
             Real reviews from real buyers
           </p>

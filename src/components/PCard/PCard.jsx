@@ -74,15 +74,15 @@ const PCard = ({ title, category, price, discount, image, id }) => {
         <div className="card-actions mt-4 flex gap-3">
           <Link
             to={`/kidsDitails/${id}`}
-            className="btn btn-outline btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200"
+            className="btn btn-outline btn-primary text-xs flex-1 gap-2 hover:gap-3 transition-all duration-200"
           >
-            <FaEye /> View Details
+            <FaEye size={18} /> View Details
           </Link>
           <button
             onClick={() => handleAddCart(id)}
-            className="btn btn-primary flex-1 gap-2 hover:gap-3 transition-all duration-200"
+            className="btn btn-primary flex-1 gap-2 text-xs hover:gap-3 transition-all duration-200"
           >
-            <FaCartPlus /> Add to Cart
+            <FaCartPlus size={18} /> Add to Cart
           </button>
         </div>
       </div>
