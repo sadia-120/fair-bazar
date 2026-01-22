@@ -15,7 +15,7 @@ const PaymentSuccess = () => {
     setValId(vid);
 
     // Optional: You can POST to server here for final verification if you want
-    // axios.post("https://fairbazar-server.vercel.app/success", { tran_id: tid, val_id: vid });
+    axios.post("https://fairbazar-server.vercel.app/success", { tran_id: tid, val_id: vid });
   }, [searchParams]);
 
   return (
